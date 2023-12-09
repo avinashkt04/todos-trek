@@ -7,6 +7,7 @@ function TodoItem({todo}) {
     const {updateTodo, deleteTodo, toggleStatus} = useTodo()
 
     const editTodo = () => {
+        if(!todoMsg) return deleteTodo(todo.id)
         updateTodo(todo.id, {...todo, todo: todoMsg})
         setIsTodoEditable(false)
     }
@@ -17,9 +18,8 @@ function TodoItem({todo}) {
 
   return (
     <div className={`w-full flex items-center bg-fuchsia-200 border rounded-lg h-12 p-2 my-4 ${todo.completed ? "bg-green-300" : "bg-fuchsia-200"}`}>
-      <div className="flex absolute text-[0.6em] border rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-1 gap-2 mb-11 font-bold items-center text-white">
-        <p>{todo.time}</p> |
-        <p>{todo.date}</p>
+      <div className="absolute text-[0.6em] border rounded-xl bg-gradient-to-r from-violet-500 to-fuchsia-500 px-2 mb-11 font-bold text-white">
+        <p>{todo.time}</p>
       </div>
 
       <input 
